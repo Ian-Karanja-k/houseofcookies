@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { cookies, type CookieCategory } from "@/data/cookies";
 import CookieCard from "@/components/CookieCard";
 
-const categories: ("All" | CookieCategory)[] = ["All", "Chocolate", "Vanilla", "Special Editions"];
+const categories: ("All" | CookieCategory)[] = ["All", "Chocolate", "Vanilla", "Coconut", "Special Editions"];
 
 const Products = () => {
   const [active, setActive] = useState<"All" | CookieCategory>("All");
