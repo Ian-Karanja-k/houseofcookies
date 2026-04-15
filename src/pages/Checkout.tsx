@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const Checkout = () => {
   const { items, totalPrice, clearCart } = useCart();
   const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -15,7 +17,7 @@ const Checkout = () => {
     paymentMethod: "mpesa" as "mpesa" | "cash",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (items.length === 0) {
       toast.error("Your cart is empty");
@@ -25,9 +27,45 @@ const Checkout = () => {
       toast.error("Please fill in all required fields");
       return;
     }
-    toast.success("Order placed successfully! We'll contact you shortly.");
-    clearCart();
-    navigate("/");
+
+    setSubmitting(true);
+    try {
+      // Create the order
+      const { data: order, error: orderError } = await supabase
+        .from("orders")
+        .insert({
+          customer_name: form.name.trim(),
+          customer_phone: form.phone.trim(),
+          delivery_location: form.location.trim() || null,
+          delivery_method: form.deliveryMethod,
+          payment_method: form.paymentMethod,
+          total_price: totalPrice,
+        })
+        .select()
+        .single();
+
+      if (orderError) throw orderError;
+
+      // Create order items
+      const orderItems = items.map((item) => ({
+        order_id: order.id,
+        product_id: item.cookie.id,
+        quantity: item.quantity,
+        unit_price: item.cookie.price,
+      }));
+
+      const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
+      if (itemsError) throw itemsError;
+
+      toast.success("Order placed successfully! We'll contact you shortly.");
+      clearCart();
+      navigate("/");
+    } catch (error) {
+      console.error("Order error:", error);
+      toast.error("Failed to place order. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -134,9 +172,10 @@ const Checkout = () => {
 
               <button
                 type="submit"
-                className="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary/90 transition-colors text-lg"
+                disabled={submitting}
+                className="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary/90 transition-colors text-lg disabled:opacity-50"
               >
-                Place Order — KSh {totalPrice}
+                {submitting ? "Placing Order..." : `Place Order — KSh ${totalPrice}`}
               </button>
             </form>
           )}
