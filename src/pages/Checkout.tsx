@@ -172,9 +172,10 @@ const Checkout = () => {
 
               <button
                 type="submit"
-                className="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary/90 transition-colors text-lg"
+                disabled={submitting}
+                className="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary/90 transition-colors text-lg disabled:opacity-50"
               >
-                Place Order — KSh {totalPrice}
+                {submitting ? "Placing Order..." : `Place Order — KSh ${totalPrice}`}
               </button>
             </form>
           )}
