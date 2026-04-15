@@ -23,7 +23,7 @@ export interface Cookie {
 
 export const cookies: Cookie[] = [
   {
-    id: "1",
+    id: "a0000001-0000-0000-0000-000000000001",
     name: "Double Chocolate Truffle",
     description: "Rich Belgian chocolate with a molten truffle center",
     price: 350,
@@ -31,7 +31,7 @@ export const cookies: Cookie[] = [
     category: "Chocolate",
   },
   {
-    id: "2",
+    id: "a0000001-0000-0000-0000-000000000002",
     name: "Chocolate Chip Classic",
     description: "Golden butter cookie loaded with premium chocolate chips",
     price: 300,
@@ -39,7 +39,7 @@ export const cookies: Cookie[] = [
     category: "Chocolate",
   },
   {
-    id: "3",
+    id: "a0000001-0000-0000-0000-000000000003",
     name: "Macadamia Chocolate",
     description: "Roasted macadamia nuts with white chocolate chips",
     price: 380,
@@ -47,7 +47,7 @@ export const cookies: Cookie[] = [
     category: "Chocolate",
   },
   {
-    id: "4",
+    id: "a0000001-0000-0000-0000-000000000004",
     name: "Vanilla Royale",
     description: "Madagascar vanilla bean with white chocolate glaze",
     price: 300,
@@ -55,7 +55,7 @@ export const cookies: Cookie[] = [
     category: "Vanilla",
   },
   {
-    id: "5",
+    id: "a0000001-0000-0000-0000-000000000005",
     name: "Red Velvet Dream",
     description: "Classic red velvet with cream cheese frosting",
     price: 400,
@@ -63,7 +63,7 @@ export const cookies: Cookie[] = [
     category: "Vanilla",
   },
   {
-    id: "6",
+    id: "a0000001-0000-0000-0000-000000000006",
     name: "Coconut Bliss",
     description: "Toasted coconut flakes with creamy white chocolate",
     price: 320,
@@ -71,7 +71,7 @@ export const cookies: Cookie[] = [
     category: "Coconut",
   },
   {
-    id: "7",
+    id: "a0000001-0000-0000-0000-000000000007",
     name: "Coconut Caramel Swirl",
     description: "Coconut cookie with rich salted caramel ribbons",
     price: 360,
@@ -79,7 +79,7 @@ export const cookies: Cookie[] = [
     category: "Coconut",
   },
   {
-    id: "8",
+    id: "a0000001-0000-0000-0000-000000000008",
     name: "Ginger Snap Luxe",
     description: "Warm ginger spice with crystallized ginger pieces",
     price: 350,
@@ -87,7 +87,7 @@ export const cookies: Cookie[] = [
     category: "Special Editions",
   },
   {
-    id: "9",
+    id: "a0000001-0000-0000-0000-000000000009",
     name: "Banana Foster",
     description: "Caramelized banana with brown sugar and cinnamon",
     price: 380,
@@ -95,7 +95,7 @@ export const cookies: Cookie[] = [
     category: "Special Editions",
   },
   {
-    id: "10",
+    id: "a0000001-0000-0000-0000-000000000010",
     name: "Honey Glazed Gold",
     description: "Raw honey glaze with oat crumble and sea salt",
     price: 400,
@@ -103,7 +103,7 @@ export const cookies: Cookie[] = [
     category: "Special Editions",
   },
   {
-    id: "11",
+    id: "a0000001-0000-0000-0000-000000000011",
     name: "Matcha Zen",
     description: "Ceremonial grade matcha with white chocolate",
     price: 450,
