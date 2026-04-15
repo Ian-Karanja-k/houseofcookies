@@ -3,6 +3,7 @@ import { ShoppingCart, Menu, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import hocLogo from "@/assets/hoc-logo.png";
 
 const Navbar = () => {
   const { totalItems } = useCart();
@@ -19,8 +20,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <span className="font-heading text-2xl font-bold text-gradient-gold">HOC</span>
-          <span className="hidden sm:inline text-muted-foreground text-sm font-body">House of Cookies</span>
+          <img src={hocLogo} alt="House of Cookies" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop nav */}
