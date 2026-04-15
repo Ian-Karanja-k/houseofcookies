@@ -42,6 +42,7 @@ const Checkout = () => {
           delivery_method: form.deliveryMethod,
           payment_method: form.paymentMethod,
           total_price: totalPrice,
+          user_id: user?.id || null,
         })
         .select()
         .single();
