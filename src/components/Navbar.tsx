@@ -1,19 +1,22 @@
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, User, LogOut, Shield } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import hocLogo from "@/assets/hoc-logo.png";
 
 const Navbar = () => {
   const { totalItems } = useCart();
+  const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
     { to: "/", label: "Home" },
     { to: "/products", label: "Menu" },
-    { to: "/checkout", label: "Checkout" },
+    ...(user ? [{ to: "/orders", label: "My Orders" }] : []),
+    ...(isAdmin ? [{ to: "/admin", label: "Dashboard" }] : []),
   ];
 
   return (
@@ -24,7 +27,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {links.map((link) => (
             <Link
               key={link.to}
@@ -44,6 +47,23 @@ const Navbar = () => {
               </span>
             )}
           </Link>
+          {user ? (
+            <button
+              onClick={() => signOut()}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            >
+              <User className="w-4 h-4" />
+              Sign In
+            </Link>
+          )}
         </div>
 
         {/* Mobile */}
@@ -83,6 +103,18 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+              {user ? (
+                <button
+                  onClick={() => { signOut(); setMobileOpen(false); }}
+                  className="text-sm font-medium text-muted-foreground text-left"
+                >
+                  Sign Out
+                </button>
+              ) : (
+                <Link to="/auth" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-primary">
+                  Sign In
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
